@@ -116,10 +116,7 @@ func (g *Game) gameresult(w http.ResponseWriter, r *http.Request, ps httprouter.
 	result := g.IGameRule.GameRequest(RuleRequest)
 	user.UserGameInfo.SumMoney(result.Totalwinscore - result.BetMoney)
 	resultMap := result.GameResult
-	// resultMap["totalwinscore"] = result.Totalwinscore
-	// resultMap["playermoney"] = user.UserGameInfo.GetMoney()
-	// resultMap["normalresult"] = result.GameResult["normalresult"]
-	// resultMap["freegamecount"] = result.OtherData["freegamecount"]
+	resultMap["playermoney"] = user.UserGameInfo.GetMoney()
 
 	g.EndOrder(proto.Token, order)
 	g.Server.HTTPResponse(w, resultMap, messagehandle.New())
