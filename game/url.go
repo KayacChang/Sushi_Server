@@ -14,7 +14,7 @@ import (
 	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/igame"
 	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/messagehandle"
 	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/socket"
-	"gitlab.fbk168.com/gamedevjp/cyberpunk/server/game/constants"
+	"gitlab.fbk168.com/gamedevjp/sushi/server/game/constants"
 	"gitlab.fbk168.com/gamedevjp/sushi/server/game/db"
 	"gitlab.fbk168.com/gamedevjp/sushi/server/game/protocol"
 )
