@@ -4,12 +4,12 @@ import (
 	"encoding/json"
 	"errors"
 
-	"github.com/YWJSonic/GameServer/sushi/game/gamerule"
 	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/foundation"
 	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/foundation/fileload"
 	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/iserver"
 	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/restfult"
 	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/socket"
+	"gitlab.fbk168.com/gamedevjp/sushi/server/game/gamerule"
 )
 
 // NewGameServer ...

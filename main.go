@@ -1,6 +1,6 @@
 package main
 
-import "github.com/YWJSonic/GameServer/sushi/game"
+import "gitlab.fbk168.com/gamedevjp/sushi/server/game"
 
 func main() {
 	game.NewGameServer()

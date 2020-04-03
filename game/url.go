@@ -7,8 +7,6 @@ import (
 	"strings"
 	"time"
 
-	"github.com/YWJSonic/GameServer/sushi/game/db"
-	"github.com/YWJSonic/GameServer/sushi/game/protocol"
 	"github.com/gorilla/websocket"
 	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/code"
 	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/foundation"
@@ -17,6 +15,8 @@ import (
 	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/messagehandle"
 	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/socket"
 	"gitlab.fbk168.com/gamedevjp/cyberpunk/server/game/constants"
+	"gitlab.fbk168.com/gamedevjp/sushi/server/game/db"
+	"gitlab.fbk168.com/gamedevjp/sushi/server/game/protocol"
 )
 
 func (g *Game) createNewSocket(w http.ResponseWriter, r *http.Request) {
