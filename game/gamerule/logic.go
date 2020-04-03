@@ -3,9 +3,9 @@ package gamerule
 import (
 	"fmt"
 
-	"github.com/YWJSonic/ServerUtility/foundation"
-	"github.com/YWJSonic/ServerUtility/foundation/math"
-	"github.com/YWJSonic/ServerUtility/gameplate"
+	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/foundation"
+	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/foundation/math"
+	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/gameplate"
 )
 
 type result struct {

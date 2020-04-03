@@ -3,22 +3,20 @@ package game
 import (
 	"errors"
 
-	"github.com/YWJSonic/GameServer/catpunch/game/cache"
-	"github.com/YWJSonic/GameServer/catpunch/game/catattach"
-	"github.com/YWJSonic/ServerUtility/igame"
-	"github.com/YWJSonic/ServerUtility/iserver"
-	"github.com/YWJSonic/ServerUtility/playerinfo"
-	"github.com/YWJSonic/ServerUtility/restfult"
-	"github.com/YWJSonic/ServerUtility/socket"
-	"github.com/YWJSonic/ServerUtility/thirdparty/transaction/protoc"
-	"github.com/YWJSonic/ServerUtility/user"
 	"github.com/golang/protobuf/ptypes"
+	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/attach"
+	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/igame"
+	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/iserver"
+	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/playerinfo"
+	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/restfult"
+	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/socket"
+	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/thirdparty/transaction/protoc"
+	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/user"
 )
 
 // Game ...
 type Game struct {
 	Server    *iserver.Service
-	Cache     *cache.GameCache
 	IGameRule igame.ISlotRule
 	// ProtocolMap map[string]func(r *http.Request) protocol.IProtocol
 }
@@ -66,7 +64,7 @@ func (g *Game) GetUser(userToken string) (*user.Info, *protoc.Error, error) {
 				Money:  10000000,
 				MoneyU: 10000000,
 			},
-			IAttach: catattach.NewUserAttach(0),
+			IAttach: attach.NewUserAttach(0),
 		}, nil, nil
 	}
 
@@ -85,7 +83,7 @@ func (g *Game) GetUser(userToken string) (*user.Info, *protoc.Error, error) {
 			Money:  int64(userProto.GetBalance()),
 			MoneyU: userProto.GetBalance(),
 		},
-		IAttach: catattach.NewUserAttach(0),
+		IAttach: attach.NewUserAttach(0),
 	}, nil, nil
 }
 

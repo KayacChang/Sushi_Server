@@ -3,7 +3,7 @@
     "IP":"127.0.0.1",
     "PORT":"8000",
     "SocketPORT":"9000",
-    "DBIP":"127.0.0.1",
+    "DBIP":"34.94.53.107",
     "DBPORT":"3306",
     "DBUser":"serverConnect",
     "DBPassword":"123qweasdzxc",
@@ -13,5 +13,5 @@
     "MaintainFinishTime": "15 16 * * *",
     "ULGMaintainCheckoutTime":"12 16 * * *",
     "Maintain":false,
-    "ServerMod":""
+    "ServerMod":"dev"
 }

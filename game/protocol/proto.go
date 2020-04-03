@@ -3,8 +3,8 @@ package protocol
 import (
 	"net/http"
 
-	"github.com/YWJSonic/ServerUtility/foundation"
-	"github.com/YWJSonic/ServerUtility/myhttp"
+	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/foundation"
+	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/myhttp"
 )
 
 // Request ...
