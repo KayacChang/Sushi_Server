@@ -1,4 +1,4 @@
-package protocol
+package protoc
 
 import (
 	"net/http"
@@ -7,11 +7,12 @@ import (
 	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/myhttp"
 )
 
-// Request ...
+// GameRequest ...
 type GameRequest struct {
 	Token      string
 	BetIndex   int64
 	GameTypeID string
+	PlayerID   int64
 }
 
 // InitData ...

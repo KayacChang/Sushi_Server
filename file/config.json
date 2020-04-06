@@ -13,5 +13,5 @@
     "MaintainFinishTime": "15 16 * * *",
     "ULGMaintainCheckoutTime":"12 16 * * *",
     "Maintain":false,
-    "ServerMod":"dev"
+    "ServerMod":""
 }

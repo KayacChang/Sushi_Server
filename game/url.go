@@ -16,7 +16,7 @@ import (
 	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/socket"
 	"gitlab.fbk168.com/gamedevjp/sushi/server/game/constants"
 	"gitlab.fbk168.com/gamedevjp/sushi/server/game/db"
-	"gitlab.fbk168.com/gamedevjp/sushi/server/game/protocol"
+	"gitlab.fbk168.com/gamedevjp/sushi/server/game/protoc"
 )
 
 func (g *Game) createNewSocket(w http.ResponseWriter, r *http.Request) {
@@ -49,7 +49,7 @@ func (g *Game) SocketMessageHandle(msg socket.Message) error {
 }
 
 func (g *Game) gameinit(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	var proto protocol.InitRequest
+	var proto protoc.InitRequest
 	proto.InitData(r)
 
 	// get user
@@ -64,9 +64,9 @@ func (g *Game) gameinit(w http.ResponseWriter, r *http.Request, ps httprouter.Pa
 	result := map[string]interface{}{
 		"betrate": g.IGameRule.GetBetSetting(),
 		"player": map[string]interface{}{
-			"gameaccount": g.IGameRule.GetGameTypeID(),
-			"id":          user.UserGameInfo.IDStr,
-			"money":       user.UserGameInfo.GetMoney(),
+			"gametypeid": g.IGameRule.GetGameTypeID(),
+			"id":         user.UserGameInfo.IDStr,
+			"money":      user.UserGameInfo.GetMoney(),
 		},
 		"reel": g.IGameRule.GetReel(),
 	}
@@ -74,7 +74,7 @@ func (g *Game) gameinit(w http.ResponseWriter, r *http.Request, ps httprouter.Pa
 }
 
 func (g *Game) gameresult(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	var proto protocol.GameRequest
+	var proto protoc.GameRequest
 	proto.InitData(r)
 
 	user, _, err := g.GetUser(proto.Token)
