@@ -119,6 +119,8 @@ func (g *Game) gameresult(w http.ResponseWriter, r *http.Request, ps httprouter.
 	}
 	result := g.IGameRule.GameRequest(RuleRequest)
 	user.UserGameInfo.SumMoney(result.Totalwinscore - result.BetMoney)
+
+	order.Win = uint64(result.Totalwinscore)
 	resultMap := result.GameResult
 	resultMap["playermoney"] = user.UserGameInfo.GetMoney()
 
