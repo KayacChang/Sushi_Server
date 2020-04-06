@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/YWJSonic/ServerUtility/cacheinfo"
-	"github.com/YWJSonic/ServerUtility/code"
-	"github.com/YWJSonic/ServerUtility/messagehandle"
 	"github.com/gomodule/redigo/redis"
+	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/cacheinfo"
+	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/code"
+	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/messagehandle"
 )
 
 // Setting ...
