@@ -4,11 +4,11 @@ import (
 	"encoding/json"
 	"errors"
 
-	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/foundation"
-	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/foundation/fileload"
-	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/iserver"
-	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/restfult"
-	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/socket"
+	"github.com/YWJSonic/ServerUtility/foundation"
+	"github.com/YWJSonic/ServerUtility/foundation/fileload"
+	"github.com/YWJSonic/ServerUtility/iserver"
+	"github.com/YWJSonic/ServerUtility/restfult"
+	"github.com/YWJSonic/ServerUtility/socket"
 	"gitlab.fbk168.com/gamedevjp/sushi/server/game/gamerule"
 )
 

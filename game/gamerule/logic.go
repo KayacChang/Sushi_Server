@@ -3,9 +3,9 @@ package gamerule
 import (
 	"fmt"
 
-	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/foundation"
-	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/foundation/math"
-	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/gameplate"
+	"github.com/YWJSonic/ServerUtility/foundation"
+	"github.com/YWJSonic/ServerUtility/foundation/math"
+	"github.com/YWJSonic/ServerUtility/gameplate"
 )
 
 type result struct {
@@ -148,7 +148,6 @@ func (r *Rule) aRound(betMoney int64, scorll [][]int, option gameplate.PlateOpti
 						if tmpline.Score > infoLine.Score {
 							infoLine = tmpline
 							infoLine.LineWinIndex = lineIndex
-							// paylinestr = fmt.Sprintf("%v", payLine[:len(payLine)-1])
 						}
 					}
 				}

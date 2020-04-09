@@ -5,15 +5,15 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/YWJSonic/ServerUtility/igame"
+	"github.com/YWJSonic/ServerUtility/iserver"
+	_ "github.com/YWJSonic/ServerUtility/mysql"
+	"github.com/YWJSonic/ServerUtility/playerinfo"
+	"github.com/YWJSonic/ServerUtility/restfult"
+	"github.com/YWJSonic/ServerUtility/socket"
+	"github.com/YWJSonic/ServerUtility/user"
 	"github.com/golang/protobuf/proto"
 	"github.com/golang/protobuf/ptypes"
-	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/igame"
-	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/iserver"
-	_ "gitlab.fbk168.com/gamedevjp/backend-utility/utility/mysql"
-	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/playerinfo"
-	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/restfult"
-	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/socket"
-	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/user"
 	"gitlab.fbk168.com/gamedevjp/sushi/server/game/cache"
 	"gitlab.fbk168.com/gamedevjp/sushi/server/game/protoc"
 )
@@ -78,7 +78,6 @@ func (g *Game) GetUser(userToken string) (*user.Info, *protoc.Error, error) {
 			UserServerInfo: &playerinfo.AccountInfo{},
 			UserGameInfo: &playerinfo.Info{
 				IDStr:  "devtest",
-				Money:  10000000,
 				MoneyU: 10000000,
 			},
 		}, nil, nil
@@ -110,7 +109,6 @@ func (g *Game) GetUser(userToken string) (*user.Info, *protoc.Error, error) {
 		UserServerInfo: &playerinfo.AccountInfo{},
 		UserGameInfo: &playerinfo.Info{
 			IDStr:  userProto.GetUserId(),
-			Money:  int64(userProto.GetBalance()),
 			MoneyU: userProto.GetBalance(),
 		},
 	}, nil, nil

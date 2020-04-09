@@ -4,9 +4,9 @@ import (
 	"database/sql"
 	"fmt"
 
-	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/dbinfo"
-	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/foundation"
-	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/messagehandle"
+	"github.com/YWJSonic/ServerUtility/dbinfo"
+	"github.com/YWJSonic/ServerUtility/foundation"
+	"github.com/YWJSonic/ServerUtility/messagehandle"
 )
 
 // SetLog new goruting set log

@@ -7,13 +7,13 @@ import (
 	"strings"
 	"time"
 
+	"github.com/YWJSonic/ServerUtility/code"
+	"github.com/YWJSonic/ServerUtility/foundation"
+	"github.com/YWJSonic/ServerUtility/httprouter"
+	"github.com/YWJSonic/ServerUtility/igame"
+	"github.com/YWJSonic/ServerUtility/messagehandle"
+	"github.com/YWJSonic/ServerUtility/socket"
 	"github.com/gorilla/websocket"
-	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/code"
-	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/foundation"
-	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/httprouter"
-	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/igame"
-	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/messagehandle"
-	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/socket"
 	"gitlab.fbk168.com/gamedevjp/sushi/server/game/constants"
 	"gitlab.fbk168.com/gamedevjp/sushi/server/game/db"
 	"gitlab.fbk168.com/gamedevjp/sushi/server/game/protoc"
@@ -53,11 +53,19 @@ func (g *Game) gameinit(w http.ResponseWriter, r *http.Request, ps httprouter.Pa
 	proto.InitData(r)
 
 	// get user
-	user, _, err := g.GetUser(proto.Token)
+	user, errproto, err := g.GetUser(proto.Token)
+	if errproto != nil {
+		errMsg := messagehandle.New()
+		errMsg.ErrorCode = code.GetUserError
+		errMsg.Msg = fmt.Sprintf("%d : %s:", errproto.GetCode(), errproto.GetMessage())
+		g.Server.HTTPResponse(w, "", errMsg)
+		return
+	}
 	if err != nil {
-		err := messagehandle.New()
-		err.ErrorCode = code.NoThisPlayer
-		g.Server.HTTPResponse(w, "", err)
+		errMsg := messagehandle.New()
+		errMsg.ErrorCode = code.GetUserError
+		errMsg.Msg = err.Error()
+		g.Server.HTTPResponse(w, "", errMsg)
 		return
 	}
 
@@ -77,16 +85,31 @@ func (g *Game) gameresult(w http.ResponseWriter, r *http.Request, ps httprouter.
 	var proto protoc.GameRequest
 	proto.InitData(r)
 
-	user, _, err := g.GetUser(proto.Token)
-	if err != nil {
-		err := messagehandle.New()
-		err.Msg = "GameTypeError"
-		err.ErrorCode = code.GameTypeError
-		// messagehandle.ErrorLogPrintln("GetPlayerInfoByPlayerID-2", err, token, betIndex, betMoney)
-		g.Server.HTTPResponse(w, "", err)
+	if proto.GameTypeID != g.IGameRule.GetGameTypeID() {
+		errMsg := messagehandle.New()
+		errMsg.ErrorCode = code.GameTypeError
+		errMsg.Msg = "GameTypeError"
+		g.Server.HTTPResponse(w, "", errMsg)
 		return
 	}
-	if user.UserGameInfo.Money < g.IGameRule.GetBetMoney(proto.BetIndex) {
+
+	user, errproto, err := g.GetUser(proto.Token)
+	if errproto != nil {
+		errMsg := messagehandle.New()
+		errMsg.ErrorCode = code.NewOrderError
+		errMsg.Msg = fmt.Sprintf("%d : %s:", errproto.GetCode(), errproto.GetMessage())
+		g.Server.HTTPResponse(w, "", errMsg)
+		return
+	}
+	if err != nil {
+		errMsg := messagehandle.New()
+		errMsg.ErrorCode = code.GetUserError
+		errMsg.Msg = err.Error()
+		g.Server.HTTPResponse(w, "", errMsg)
+		return
+	}
+
+	if user.UserGameInfo.GetMoney() < g.IGameRule.GetBetMoney(proto.BetIndex) {
 		err := messagehandle.New()
 		err.Msg = "NoMoneyToBet"
 		err.ErrorCode = code.NoMoneyToBet
@@ -95,23 +118,22 @@ func (g *Game) gameresult(w http.ResponseWriter, r *http.Request, ps httprouter.
 	}
 
 	order, errproto, err := g.NewOrder(proto.Token, user.UserGameInfo.IDStr, g.IGameRule.GetBetMoney(proto.BetIndex))
-
 	if errproto != nil {
-		err := messagehandle.New()
-		err.Msg = errproto.String()
-		err.ErrorCode = code.ULGInfoFormatError
-		g.Server.HTTPResponse(w, "", err)
+		errMsg := messagehandle.New()
+		errMsg.Msg = fmt.Sprintf("%d : %s:", errproto.GetCode(), errproto.GetMessage())
+		errMsg.ErrorCode = code.NewOrderError
+		g.Server.HTTPResponse(w, "", errMsg)
 		return
 	}
 	if err != nil {
-		err := messagehandle.New()
-		err.Msg = "ULGInfoFormatError"
-		err.ErrorCode = code.ULGInfoFormatError
-		g.Server.HTTPResponse(w, "", err)
+		errMsg := messagehandle.New()
+		errMsg.Msg = err.Error()
+		errMsg.ErrorCode = code.NewOrderError
+		g.Server.HTTPResponse(w, "", errMsg)
 		return
 	}
 
-	oldMoney := user.UserGameInfo.Money
+	oldMoney := user.UserGameInfo.GetMoney()
 	// get game result
 	RuleRequest := &igame.RuleRequest{
 		BetIndex: proto.BetIndex,
@@ -133,7 +155,7 @@ func (g *Game) gameresult(w http.ResponseWriter, r *http.Request, ps httprouter.
 		time.Now().Unix(),
 		constants.ActionGameResult,
 		oldMoney,
-		user.UserGameInfo.Money,
+		user.UserGameInfo.GetMoney(),
 		result.Totalwinscore,
 		"",
 		"",
