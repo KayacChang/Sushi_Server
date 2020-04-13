@@ -1,9 +1,6 @@
 package gamerule
 
 import (
-	"fmt"
-
-	"github.com/YWJSonic/ServerUtility/foundation"
 	"github.com/YWJSonic/ServerUtility/igame"
 )
 
@@ -137,7 +134,7 @@ func (r *Rule) GameRequest(config *igame.RuleRequest) *igame.RuleRespond {
 
 	result["totalwinscore"] = totalWin
 
-	fmt.Println(foundation.JSONToString(result))
+	// fmt.Println(foundation.JSONToString(result))
 	return &igame.RuleRespond{
 		BetMoney:      betMoney,
 		Totalwinscore: totalWin,

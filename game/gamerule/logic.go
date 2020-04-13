@@ -1,8 +1,6 @@
 package gamerule
 
 import (
-	"fmt"
-
 	"github.com/YWJSonic/ServerUtility/foundation"
 	"github.com/YWJSonic/ServerUtility/foundation/math"
 	"github.com/YWJSonic/ServerUtility/gameplate"
@@ -46,9 +44,9 @@ func (r *Rule) newlogicResult(betMoney int64) result {
 	}
 
 	normalresult, otherdata, normaltotalwin := r.outputGame(betMoney, option)
-	fmt.Println("----normalresult----", normalresult)
-	fmt.Println("----otherdata----", otherdata)
-	fmt.Println("----normaltotalwin----", normaltotalwin)
+	// fmt.Println("----normalresult----", normalresult)
+	// fmt.Println("----otherdata----", otherdata)
+	// fmt.Println("----normaltotalwin----", normaltotalwin)
 	FreeGameCount := foundation.InterfaceToInt(otherdata["freegamecount"])
 	// result["freegamecount"] = FreeGameCount
 	// result["normalresult"] = normalresult
@@ -57,8 +55,8 @@ func (r *Rule) newlogicResult(betMoney int64) result {
 
 	if FreeGameCount > 0 {
 		freeresult, _, freetotalwin := r.outputFreeGame(betMoney, FreeGameCount, option)
-		fmt.Println("----freeresult----", freeresult)
-		fmt.Println("----freetotalwin----", freetotalwin)
+		// fmt.Println("----freeresult----", freeresult)
+		// fmt.Println("----freetotalwin----", freetotalwin)
 		// result["freeresult"] = freeresult
 		// result["isfreegame"] = 1
 		// totalWin += freetotalwin
