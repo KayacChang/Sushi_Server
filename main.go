@@ -19,6 +19,10 @@ type ENV struct {
 	ServerHTTPPort   string `json:"PORT"`
 	ServerSocketPort string `json:"SocketPORT"`
 
+	HTTPS bool   `json:"Https"`
+	Cert  string `json:"Cert"`
+	Key   string `json:"Key"`
+
 	DBIP       string `json:"DBIP"`
 	DBPort     string `json:"DBPORT"`
 	DBUser     string `json:"DBUser"`
@@ -29,6 +33,7 @@ type ENV struct {
 	APIURL string `json:"TransferURL"`
 
 	AccountEncode string `json:"AccountEncodeStr"`
+	ServerMod     string `json:"ServerMod"`
 	GameTypeID    string `json:"GameTypeID"`
 }
 
@@ -47,6 +52,10 @@ func main() {
 		ServerHTTPPort:   env.GetEnvAsString("SERVER_HTTP_PORT"),
 		ServerSocketPort: env.GetEnvAsString("SERVER_SOCKET_PORT"),
 
+		HTTPS: env.GetEnvAsBool("SERVER_HTTPS"),
+		Cert:  env.GetEnvAsString("SERVER_CERT"),
+		Key:   env.GetEnvAsString("SERVER_KEY"),
+
 		DBIP:       env.GetEnvAsString("DB_IP"),
 		DBPort:     env.GetEnvAsString("DB_PORT"),
 		DBUser:     env.GetEnvAsString("DB_USER"),
@@ -57,6 +66,7 @@ func main() {
 		APIURL: env.GetEnvAsString("API_URL"),
 
 		AccountEncode: env.GetEnvAsString("ACCOUNT_ENCODE"),
+		ServerMod:     env.GetEnvAsString("SERVER_MOD"),
 		GameTypeID:    env.GetEnvAsString("GAME_TYPEID"),
 	}
 

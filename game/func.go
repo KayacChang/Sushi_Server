@@ -40,7 +40,7 @@ func NewGameServer(jsStr string) {
 
 	// start DB service
 	setting := gameserver.Setting.DBSetting()
-	gameserver.LaunchDB("gamedb", setting)
+	// gameserver.LaunchDB("gamedb", setting)
 	gameserver.LaunchDB("logdb", setting)
 
 	// start restful service
